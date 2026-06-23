@@ -442,7 +442,7 @@ Valeur pedagogique:
 
 ### Projet N - Jeu de flechettes avec reconnaissance par camera
 Objectif:
-Concevoirl un systeme de jeu de flechettes digital qui detecte automatiquement la position des flechettes sur la cible par vision par ordinateur, gere les regles du jeu (301, Cricket, etc.) et affiche les scores en direct.
+Concevoir un systeme de jeu de flechettes digital qui detecte automatiquement la position des flechettes sur la cible par vision par ordinateur, gere les regles du jeu (301, Cricket, etc.) et affiche les scores en direct.
 
 Utilisateurs cibles:
 - Joueur en competition ou loisir
@@ -500,53 +500,6 @@ Valeur pedagogique:
 - interface utilisateur pour gestion de competition
 - interaction homme-machine temps reel
 
----
-Objectif:
-Concevoir un mini poste d'assemblage qui construit des modeles ludiques (personnages type briques et mini droide type R2D2 simplifie), en guidant l'utilisateur ou un bras simple piece par piece.
-
-Utilisateurs cibles:
-- Etudiant en phase d'assemblage
-- Tuteur qui suit la qualite du processus
-
-Composants possibles:
-- Camera de poste
-- Eclairage ou guidage lumineux par zones
-- Bras robotique simple ou systeme de guidage mecanique
-- Base de donnees de recettes de montage
-- Interface web de suivi du poste
-
-Detail fonctionnel attendu:
-- Parcours 1: selection d'un modele a construire (personnage simplifie ou mini droide simplifie).
-- Parcours 2: le systeme reconnait l'etape courante et indique la piece suivante.
-- Parcours 3: si une mauvaise piece est detectee, il emet une alerte visuelle et sonore.
-- Parcours 4: suivi du temps d'assemblage et des erreurs par sequence.
-- Gestion incidents: si la camera perd le poste, le systeme se met en mode assistance manuelle.
-
-Fonctionnalites MVP:
-- Reconnaissance d'etapes de montage
-- Assistance visuelle au poste
-- Journal des erreurs d'assemblage
-- Interface de suivi des temps
-- Deux recettes completes minimum (personnage simplifie + mini droide simplifie)
-
-Extensions possibles:
-- Recommandation du meilleur ordre d'assemblage
-- Detection automatique d'omissions
-- Score de qualite du montage
-- Mode chrono et classement entre equipes
-- Bibliotheque de modeles ludiques supplementaires
-
-KPI de validation:
-- Reduction des erreurs d'assemblage
-- Temps de completion d'une sequence
-- Qualite de guidage percue par l'utilisateur
-- Taux de modeles finalises sans reprise manuelle
-
-Valeur pedagogique:
-- vision appliquee
-- aide a l'assemblage industriel
-- interaction homme-machine contextualisee
-- gamification de l'assemblage
 
 ## 9) Methode de choix et affectation des 5 groupes
 Avec 7 idees disponibles (A a E, L, N), les etudiants disposent d'un vrai choix de sujet.
