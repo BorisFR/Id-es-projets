@@ -13,8 +13,8 @@ Orientation pedagogique souhaitee :
 - Effectif: 25 etudiants
 - Organisation: 5 groupes de 5 etudiants
 - Volume horaire cible par groupe: environ 900h
-- Decoupage temporel: 4 periodes de 4 semaines (16 semaines au total)
-- Evaluation orale: 1 soutenance a la fin de chaque periode + 1 soutenance finale (soit 5 soutenances)
+- Decoupage temporel: 3 periodes (4, 5 et 9 semaines, soit 18 semaines au total)
+- Evaluation orale: 1 soutenance a la fin de chaque periode + 1 soutenance finale (soit 4 soutenances)
 
 ## 3) Analyse rapide du besoin
 Les idees initiales sont pertinentes car elles couvrent deja:
@@ -31,8 +31,8 @@ Points a completer pour un cadrage pedagogique robuste:
 
 ## 4) Socle technique recommande (commun a tous les groupes)
 Chaque projet devrait inclure au minimum:
-- Electronique/embarque: microcontroleur (ESP32, STM32, Arduino) ou SBC (Raspberry Pi)
-- Logiciel: API/backend (Python FastAPI, Node.js ou equivalent)
+- Electronique/embarque: microcontroleur (ESP32, Raspberry Pi Pico) ou SBC (Raspberry Pi)
+- Logiciel: API/backend en .NET 10 (ASP.NET Core) avec interface Blazor
 - Interface: application web ou mobile
 - IA: au moins un module exploitable en demonstration (classification, detection, recommandation, prediction)
 - DevOps: gestion de version, CI simple, documentation deploiement
@@ -53,17 +53,15 @@ Proposition de decoupage:
 - Tests, robustesse, optimisation: 20h
 - Documentation, soutenance, demo finale: 15h
 
-Cadence par periodes (4 x 4 semaines):
+Cadence par periodes:
 - Periode 1 (Semaines 1 a 4): cadrage, etat de l'art, architecture cible, preuve de faisabilite
-- Periode 2 (Semaines 5 a 8): MVP logiciel + premier prototype electronique integre
-- Periode 3 (Semaines 9 a 12): consolidation technique, module IA operationnel, integration systeme
-- Periode 4 (Semaines 13 a 16): robustesse, tests en conditions reelles, finalisation des livrables
+- Periode 2 (Semaines 5 a 9): MVP logiciel + premier prototype electronique integre + consolidation technique
+- Periode 3 (Semaines 10 a 18): module IA operationnel, integration systeme, robustesse, tests en conditions reelles, finalisation des livrables
 
 Soutenances:
-- Soutenance 1: fin Periode 1 (revue de cadrage)
-- Soutenance 2: fin Periode 2 (revue MVP)
-- Soutenance 3: fin Periode 3 (revue d'integration)
-- Soutenance 4: fin Periode 4 (pre-validation technique)
+- Soutenance 1: fin Periode 1 (semaine 4, revue de cadrage)
+- Soutenance 2: fin Periode 2 (semaine 9, revue MVP)
+- Soutenance 3: fin Periode 3 (semaine 18, revue d'integration et validation technique)
 - Soutenance finale: presentation finale complete (resultats, demo, retour critique)
 
 ## 6) Livrables attendus
@@ -388,94 +386,6 @@ Valeur pedagogique:
 
 ---
 
-### Projet I - Jeu interactif de gestes et reflexes (Motion Arena)
-Objectif:
-Concevoir un jeu physique interactif ou les joueurs reproduisent des gestes, postures ou sequences motrices pour marquer des points en temps reel.
-
-Utilisateurs cibles:
-- Joueur (etudiant seul ou en duel)
-- Animateur/enseignant qui parametre les niveaux
-
-Composants possibles:
-- Camera frontale
-- Eclairage de poste
-- Backend d'analyse de posture ou de sequence
-- Ecran de score et de feedback visuel
-- Signal lumineux/sonore pour rythmer les manches
-
-Detail fonctionnel attendu:
-- Parcours 1: le jeu affiche une consigne de geste a reproduire dans un temps limite.
-- Parcours 2: le systeme valide le geste et attribue des points, bonus de vitesse et combo.
-- Parcours 3: mode duel ou tournoi avec classement local.
-- Parcours 4: mode entrainement avec conseils personnalises sur les erreurs recurrentes.
-
-Fonctionnalites MVP:
-- Capture video simple ou image fixe
-- Classification de posture ou de geste
-- Feedback visuel ou sonore
-- Score en direct et classement local
-
-Extensions possibles:
-- Analyse de sequence complete
-- Personnalisation des niveaux de jeu
-- Mode cooperatif equipe contre chrono
-- Defis hebdomadaires et progression joueur
-
-KPI de validation:
-- Precision de classification des gestes
-- Temps de retour de feedback
-- Satisfaction des joueurs et taux de rejouabilite
-
-Valeur pedagogique:
-- vision par ordinateur
-- apprentissage supervise
-- gamification de l'apprentissage
-
----
-
-### Projet K - Challenge moteur: course, boost et efficacite
-Objectif:
-Concevoir un mini challenge competitif ou les equipes reglent un moteur pour relever des epreuves (vitesse, endurance, precision) avec un score final melant performance et efficacite.
-
-Utilisateurs cibles:
-- Equipes etudiantes en mode challenge
-- Jury/animateur qui arbitre les manches
-
-Composants possibles:
-- Moteur electrique miniature avec charge variable
-- Capteurs courant, tension, vitesse, temperature
-- Controleur embarque et backend d'analyse
-- Tableau de score temps reel
-
-Detail fonctionnel attendu:
-- Parcours 1: chaque equipe prepare un reglage pour une manche donnee (sprint, endurance, precision).
-- Parcours 2: execution de la manche avec affichage du score en direct.
-- Parcours 3: calcul du score final incluant performance, stabilite et sobriete energetique.
-- Gestion incidents: si la temperature ou le courant depasse un seuil, penalite automatique et mode protection.
-
-Fonctionnalites MVP:
-- Visualisation des mesures clefs
-- Enregistrement des profils d'equipe
-- Calcul automatique du score
-- Arret de securite sur depassement de seuil
-
-Extensions possibles:
-- IA coach pour suggerer des reglages
-- Classement multi-manches
-- Mode ligue inter-groupes
-
-KPI de validation:
-- Equilibre performance/consommation atteint
-- Stabilite du moteur pendant les manches
-- Lisibilite et acceptation des regles de score
-
-Valeur pedagogique:
-- optimisation sous contrainte
-- instrumentation embarquee
-- apprentissage par competition
-
----
-
 ### Projet L - Casier intelligent de pret de materiel
 Objectif:
 Gerer un casier connecte permettant de prêter du materiel aux etudiants avec traçabilite, autorisation et suivi des retours.
@@ -530,7 +440,67 @@ Valeur pedagogique:
 
 ---
 
-### Projet M - Atelier d'assemblage assiste par vision et guidage lumineux
+### Projet N - Jeu de flechettes avec reconnaissance par camera
+Objectif:
+Concevoirl un systeme de jeu de flechettes digital qui detecte automatiquement la position des flechettes sur la cible par vision par ordinateur, gere les regles du jeu (301, Cricket, etc.) et affiche les scores en direct.
+
+Utilisateurs cibles:
+- Joueur en competition ou loisir
+- Animateur/arbitre qui gere les parties
+- Spectateur qui visualise les scores et l'historique
+
+Composants possibles:
+- 3 cameras RGB disposees autour de la cible (ou multi-vue calibree)
+- Cible physique standard ou amelioree avec marqueurs visuels
+- Eclairage optimise pour la detection de contraste
+- Backend de traitement d'image et de reconnaissance de position
+- Serveur d'API local pour la gestion des regles et des scores
+- Interface web/tablette pour affichage des scores, gestion des joueurs et des modes de jeu
+- Affichage ecran ou projection pour spectateurs
+
+Detail fonctionnel attendu:
+- Parcours 1: initialisation d'une partie (nombre de joueurs, choix du mode de jeu: 301, Cricket, etc.).
+- Parcours 2: detecter automatiquement l'arrivee d'une nouvelle flechette et localiser sa position sur la cible.
+- Parcours 3: calculer automatiquement les points selon la zone touchee et les regles du jeu en cours.
+- Parcours 4: gerer la sequence des joueurs, afficher le joueur en cours et son tour.
+- Parcours 5: affichage temps reel des scores cumulatifs et de l'etat de chaque joueur (reste a compter, deja out, etc.).
+- Parcours 6: historique des coups et replay visuel des flechettes detaillees.
+- Gestion incidents: si une flechette n'est pas detectee ou ambigue, demander confirmation manuelle au joueur/arbitre.
+- Mode degrade: possibilite d'entrer les scores manuellement en cas de defaillance camera.
+
+Fonctionnalites MVP:
+- Detection et localisation des flechettes par camera
+- Calcul automatique des points (zones cible: simple, double, triple, bullseye)
+- Gestion de minimum 2 modes de jeu (301, Cricket)
+- Interface de configuration de partie (nombre joueurs, choix mode)
+- Affichage des scores temps reel avec joueur en cours
+- Historique des 3 derniers coups par joueur
+- Mode manuel de correction et de secours
+
+Extensions possibles:
+- Support de multiples modes de jeu (Around the world, Shanghai, etc.)
+- Statistiques joueur (taux de precision par zone, historique)
+- Classement multi-parties et ligue locale
+- Notifications vocales des scores
+- Reconnaissance des joueurs par visage ou badge
+- Couplage avec projecteur pour affichage en direct
+- Analyse IA des trajectoires et predictions
+
+KPI de validation:
+- Precision de detection des flechettes (>95% de precision)
+- Latence entre arrivee de la flechette et affichage du score (<2 secondes)
+- Taux d'erreurs non recuperees
+- Disponibilite du systeme lors d'une partie complete
+- Satisfaction des joueurs et arbitres
+
+Valeur pedagogique:
+- vision par ordinateur multi-camera
+- traitement d'image et calibration
+- gestion de regles complexes et etats de jeu
+- interface utilisateur pour gestion de competition
+- interaction homme-machine temps reel
+
+---
 Objectif:
 Concevoir un mini poste d'assemblage qui construit des modeles ludiques (personnages type briques et mini droide type R2D2 simplifie), en guidant l'utilisateur ou un bras simple piece par piece.
 
@@ -579,7 +549,7 @@ Valeur pedagogique:
 - gamification de l'assemblage
 
 ## 9) Methode de choix et affectation des 5 groupes
-Avec 9 idees disponibles (A a E, I, K, L, M), les etudiants disposent d'un vrai choix de sujet.
+Avec 7 idees disponibles (A a E, L, N), les etudiants disposent d'un vrai choix de sujet.
 
 Processus recommande:
 - Etape 1: chaque groupe soumet un Top 3 de projets (ordre de preference).
@@ -596,43 +566,30 @@ Classement recommande par difficulte et budget:
 | Projet | Intitule | Difficulté | Budget materiel | Commentaire |
 | --- | --- | --- | --- | --- |
 | L | Casier intelligent de pret de materiel | Faible a moyenne | Faible a moyen | Solide pour gestion d'acces et traçabilite |
-| I | Jeu interactif de gestes et reflexes (Motion Arena) | Moyenne | Moyen | Ludique, rejouable, ideal demo publique |
 | A | Mini robot interactif de bureau | Moyenne | Moyen | Bon point d'entree pour embarque + UX |
+| N | Jeu de flechettes avec reconnaissance camera | Moyenne a elevee | Moyen | Vision applicative, ludique, bon potentiel demo |
 | C | Geolocalisation indoor en temps reel | Moyenne a elevee | Moyen a eleve | Sensible a la calibration et aux mesures |
-| K | Challenge moteur: course, boost et efficacite | Moyenne a elevee | Moyen | Performance + strategie + sobriete |
 | D | Serre low-tech intelligente | Elevee | Moyen a eleve | Excellent sujet, mais fort risque terrain |
 | B | Mini vehicule autonome indoor | Elevee | Eleve | Tres visible, integration mecanique exigeante |
 | E | Plateau de jeu robotise strategique | Elevee | Eleve | Tres attractif, mecanique de precision et perception |
-| M | Atelier d'assemblage ludique (personnages et mini droide) | Elevee | Eleve | Tres attractif pour demos et competitions |
 
 Exemple de combinaison coherente sur 5 groupes:
 - Groupe 1: Projet A (mini robot interactif)
 - Groupe 2: Projet B (vehicule)
 - Groupe 3: Projet C (geolocalisation)
 - Groupe 4: Projet D (serre)
-- Groupe 5: Projet M (assemblage ludique)
+- Groupe 5: Projet E (plateau de jeu robotise)
 
 Couplage inter-projets recommande:
 - Projet B (vehicule) <-> Projet C (geolocalisation) via API commune.
 
-## 10) Risques principaux et plans de mitigation
-- Risque: complexite materielle trop elevee
-	Action: valider un MVP materiel avant la semaine 4
-- Risque: module IA trop ambitieux
-	Action: prevoir une version baseline non-IA
-- Risque: integration tardive
-	Action: imposer une demo d'integration intermediaire
-- Risque: disparite de niveau entre groupes
-	Action: definir un socle obligatoire et des options bonus
-
-## 11) Jalons proposes
+## 10) Jalons proposes
 - Jalon 1 (Semaine 4): fin de Periode 1 + Soutenance 1 (cadrage et faisabilite)
-- Jalon 2 (Semaine 8): fin de Periode 2 + Soutenance 2 (MVP fonctionnel)
-- Jalon 3 (Semaine 12): fin de Periode 3 + Soutenance 3 (integration IA + electronique)
-- Jalon 4 (Semaine 16): fin de Periode 4 + Soutenance 4 (systeme stabilise)
-- Jalon 5 (Final): Soutenance finale transverse (bilan, demo, perspectives)
+- Jalon 2 (Semaine 9): fin de Periode 2 + Soutenance 2 (MVP fonctionnel)
+- Jalon 3 (Semaine 18): fin de Periode 3 + Soutenance 3 (integration IA + electronique et systeme stabilise)
+- Jalon 4 (Final): Soutenance finale transverse (bilan, demo, perspectives)
 
-## 12) Conclusion
+## 11) Conclusion
 Le cadre propose permet de conserver l'esprit initial (IA appliquee, concret, ludique) tout en ajoutant un niveau de detail suffisant pour piloter 5 groupes de maniere homogene et evaluable.
 
-Le catalogue retenu (9 sujets) augmente le choix et facilite l'alignement entre interets des etudiants, budget materiel et niveau de difficulte.
+Le catalogue retenu (7 sujets) augmente le choix et facilite l'alignement entre interets des etudiants, budget materiel et niveau de difficulte.
