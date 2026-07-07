@@ -37,6 +37,7 @@ Chaque projet devrait inclure au minimum :
 - Interface : application web ou mobile
 - IA : au moins un module exploitable en démonstration (classification, détection, recommandation, prédiction)
 - DevOps : gestion de version, CI (intégration continue) simple, documentation de déploiement
+- Gestion de code source : utilisation de GitHub uniquement (pas GitLab, Bitbucket ou autre plateforme)
 - Conteneurisation : non autorisée (Docker, Podman, Kubernetes, etc.)
 - Hébergement : déploiement backend/site web possible sur VPS OVH type VPS-1 si nécessaire
 - Wi-Fi (si nécessaire) : utiliser le SSID `JUNIA_LAB`
