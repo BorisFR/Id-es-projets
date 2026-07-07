@@ -36,18 +36,18 @@ Chaque projet devrait inclure au minimum :
 - Logiciel : API/backend en .NET 10 (ASP.NET Core) avec interface Blazor
 - Interface : application web ou mobile
 - IA : au moins un module exploitable en démonstration (classification, détection, recommandation, prédiction)
-- DevOps : gestion de version, CI simple, documentation déploiement
+- DevOps : gestion de version, CI (intégration continue) simple, documentation de déploiement
 - Conteneurisation : non autorisée (Docker, Podman, Kubernetes, etc.)
 - Hébergement : déploiement backend/site web possible sur VPS OVH type VPS-1 si nécessaire
 - Wi-Fi (si nécessaire) : utiliser le SSID `JUNIA_LAB`
-- Configuration réseau : prévoir un processus de provisioning (script, assistant de première configuration) ou un portail captif via access point Wi-Fi
+- Configuration réseau : prévoir un processus de provisioning (script, assistant de première configuration) ou un portail captif via point d'accès Wi-Fi
 - Sécurité de configuration : ne jamais fixer en dur (hardcode) les paramètres Wi-Fi dans le code source
 
 Principes transverses inspirés du projet serre (à appliquer à tous les sujets) :
-- Local-first : chaîne logicielle hébergée en local (acquisition, stockage, backend, interface), sans dépendance cloud obligatoire.
+- Approche local-first : chaîne logicielle hébergée en local (acquisition, stockage, backend, interface), sans dépendance cloud obligatoire.
 - Continuité de service : le système doit conserver ses fonctions critiques même si l'interface tombe ou si le réseau est indisponible.
 - Sobriété mesurée : chaque groupe suit et justifie les ressources consommées (énergie, eau, matériaux, temps machine).
-- UX utile : les interfaces privilégient des actions claires plutôt que des dashboards complexes.
+- UX utile : les interfaces privilégient des actions claires plutôt que des tableaux de bord complexes.
 - Droit au post-mortem : en cas d'échec terrain, le groupe doit produire une analyse technique argumentée basée sur les données.
 
 ## 5) Organisation du travail (180h par étudiant)
@@ -104,7 +104,23 @@ Exemples :
 - ENF-02 : Le système doit continuer ses fonctions vitales pendant au moins 30 minutes sans interface graphique.
 - ENF-05 : Le système doit fonctionner sans dépendance cloud obligatoire sur le réseau local.
 
-### Définition of done (obligatoire)
+### Glossaire des acronymes (utilisés dans ce document)
+- EF : Exigence Fonctionnelle.
+- ENF : Exigence Non Fonctionnelle.
+- KPI : Key Performance Indicator (indicateur clé de performance).
+- UX : User eXperience (expérience utilisateur).
+- MVP : Minimum Viable Product (produit minimum viable).
+- CI : Continuous Integration (intégration continue).
+- API : Application Programming Interface (interface de programmation applicative).
+- NLP : Natural Language Processing (traitement automatique du langage naturel).
+- IoT : Internet of Things (Internet des objets).
+- JSON : JavaScript Object Notation (format texte d'échange de données).
+- CSV : Comma-Separated Values (format tabulaire texte séparé par des virgules).
+- QR : Quick Response (code 2D à lecture rapide).
+- RSSI : Received Signal Strength Indicator (indicateur de puissance de signal reçue).
+- UWB : Ultra-Wideband (ultra large bande).
+
+### Définition de terminé (Definition of Done, obligatoire)
 Un projet est considéré valide uniquement si :
 - le MVP est démontrable en conditions réelles,
 - les exigences EF/ENF critiques sont vérifiées par des tests tracés,
@@ -113,7 +129,7 @@ Un projet est considéré valide uniquement si :
 
 ### Livrables attendus à chaque soutenance
 - Soutenance 1 (Semaine 4) : problème cible, EF/ENF v1, architecture v1, preuve de faisabilité.
-- Soutenance 2 (fin Période 2) : MVP intégré (software + électronique), tests de base, premier retour utilisateur.
+- Soutenance 2 (fin Période 2) : MVP intégré (logiciel + électronique), tests de base, premier retour utilisateur.
 - Soutenance 3 (fin Période 3) : système consolidé, IA exploitable, tests d'intégration et robustesse.
 - Soutenance 4 (fin Période 4, finale) : validation terrain, corrections, bilan global, démo complète, mesures KPI, limites et feuille de route.
 
@@ -151,19 +167,19 @@ Composants possibles :
 - **Calcul embarqué** : Raspberry Pi 4 (4GB RAM) ou Pi Pico RP2040 + co-processeur SBC limité
 - **Connectivité** : Wi-Fi 802.11ac pour backend en réseau local, Bluetooth 5.0 optionnel pour mobile
 - **Alimentation** : batterie Li-Po 5000mAh (min 8h autonomie) + charge rapide USB-C, mode hibernation programmable
-- **Actionneurs simples** : servo moteur 180° pour orientation tête, verin soude pour action palpable (ascenseur de carte, préhension lumière)
+- **Actionneurs simples** : servo moteur 180° pour orientation tête, vérin pour action palpable (ascenseur de carte, préhension lumière)
 
 Détail fonctionnel attendu :
 - **Parcours 1 - Enregistrement vocal** : l'utilisateur parle au robot, qui capture l'audio, l'envoie au backend NLP local, remet en forme la commande reconnue, l'affiche à l'écran en couleur et demande confirmation vocale ("Vous avez demandé ... c'est correct?"). Latence cible : <2s
-- **Parcours 2 - Tâches et rappels** : le robot affiche un récapitulatif des 3 prochaines tâches sur l'écran avec leur priorité codée par couleur. L'utilisateur peut valider ou repousser l'ordre via les boutons. Actions l'e-mail sont synchronisées au backend
-- **Parcours 3 - Confirmation tangible** : quand une tâche est validée, le robot tourne sa tête 90°, émet un signal sonore spécifique et lum ineux, puis revient à la position initiale. Cela rend l'IA tangible et intéractive
-- **Parcours 4 - Tuteur observateur** : l'interface web (localhost:8080) affiche en direct l'historique des 20 derniers déverrouillages vocaux : texte reconnais, intention detectée, action exécutée, timestamp. Filtre par date ou type d'intention
+- **Parcours 2 - Tâches et rappels** : le robot affiche un récapitulatif des 3 prochaines tâches sur l'écran avec leur priorité codée par couleur. L'utilisateur peut valider ou repousser l'ordre via les boutons. Les actions et e-mails sont synchronisés au backend
+- **Parcours 3 - Confirmation tangible** : quand une tâche est validée, le robot tourne sa tête à 90°, émet un signal sonore spécifique et lumineux, puis revient à la position initiale. Cela rend l'IA tangible et interactive
+- **Parcours 4 - Tuteur observateur** : l'interface web (localhost:8080) affiche en direct l'historique des 20 derniers déverrouillages vocaux : texte reconnu, intention détectée, action exécutée, timestamp. Filtre par date ou type d'intention
 - **Gestion d'erreurs** : si la reconnaissance vocale ne capture rien ou décide avec faible confiance (<60%), le robot propose 2-3 commandes similaires dont l'utilisateur peut choisir. Si toujours incertain, passage en manuel (boutons)
 - **Mode dégradé** : fonctionnement complet sur réseau local sans Internet. Si NLP central indisponible, basculement automatique sur modèle léger embarqué (reconnaissance pattern simple)
-- **Alimentation et veille** : en absence de parole pendant 10min, écran en veille de 30%, moteurs désactivés. Tap sur le bouton physique réveille
+- **Alimentation et veille** : en absence de parole pendant 10min, écran en veille de 30%, moteurs désactivés. Un appui sur le bouton physique réveille le système
 
 Fonctionnalités MVP :
-- Commandes vocales basiques (reconnaissance intenté : 5-10 commandes majeures)
+- Commandes vocales basiques (reconnaissance d'intents : 5-10 commandes majeures)
 - Création de tâches/rappels avec priorité (API REST)
 - Suggestion automatique de priorités basée sur historique
 - Journal d'activité consultable en temps réel
@@ -188,12 +204,12 @@ KPI de validation :
 - Satisfaction utilisateur (score de facilité d'usage >7/10)
 
 Valeur pédagogique :
-- NLP appliquée (tokenization, intent classification)
+- NLP appliquée (tokenisation, classification d'intentions)
 - Design d'interaction homme-machine et feedback utilisateur
 - Intégration électronique visible et tangible
-- Architecture event-driven avec message broker local (RabbitMQ ou Redis)
+- Architecture pilotée par événements avec message broker local (RabbitMQ ou Redis)
 - Gestion état d'une application multi-composants
-- Circuit breaker et résidence locale pour robustesse
+- Circuit breaker et résilience locale pour robustesse
 
 ---
 
@@ -207,20 +223,20 @@ Utilisateurs cibles :
 
 Composants possibles :
 - **Châssis** : plateforme robotique 20-30cm (DFRobot, SCUTTLE ou compatible), 500g max, roues tout-terrain
-- **Moteurs** : deux moteurs DC 12V 100RPM avec encodeurs optiques (retour de position) + controles H-bridge L298N
-- **Batterie** : Li-Po 7.4V (2S) 5000mAh minimum, chargeur USB-C integrate
+- **Moteurs** : deux moteurs DC 12V 100RPM avec encodeurs optiques (retour de position) + contrôles H-bridge L298N
+- **Batterie** : Li-Po 7.4V (2S) 5000mAh minimum, chargeur USB-C intégré
 - **Capteurs de perception**:
-  - **Lidar** : YDLIDAR X4 (360°, 10m, peu di coteux) OU 5-6 capteurs ultrason (HC-SR04) pointés en éventail
+  - **Lidar** : YDLIDAR X4 (360°, 10m, peu coûteux) OU 5-6 capteurs ultrason (HC-SR04) pointés en éventail
   - **Encodeurs** : 2x encodeurs optiques sur les moteurs (résolution 20+ coups/tour)
   - **IMU** : capteur 9-DOF (accélero, gyro, magnéto : MPU6050 ou BNO055)
   - **Caméra** : webcam USB optionnelle pour détection de ligne au sol
 - **Microcontrôleur** : Raspberry Pi 4 (4GB) avec GPIO PWM pour moteurs OU ESP32 pour architecture légère
-- **Communication** : Wi-Fi pour dashboard temps réel + frequénce aréniøres 433MHz pour emergency stop radio
+- **Communication** : Wi-Fi pour tableau de bord temps réel + fréquence radio 433MHz pour arrêt d'urgence
 - **Système de sécurité** : bouton d'arrêt d'urgence mécanique, circuit de sécurité embarquée indépendante (Arduino nano redondant)
 
 Détail fonctionnel attendu :
-- **Parcours 1 - Mission autonome** : Opérateur définit un circuit via interface web (4-6 checkpoints GPS indoor alias + hauteur), véhicule se localise à l'init avec calibrage, exécute la mission en boucle avec suivi de position estimée, revient au point de départ avec précision <50cm
-- **Parcours 2 - Détection obstacle** : capteurs continuellement actifs, fusion Lidar OU ultrason pour résolution 30cm. Si obstacle détecté à <1m, freinage d'urgence en <100ms, pause 1s. Tentative contournement simple (décal de 30cm latéral). Si contournement échoue 2x, signalement par LED rouge + appel radio emergency + alerte web
+- **Parcours 1 - Mission autonome** : l'opérateur définit un circuit via interface web (4-6 points de passage indoor + hauteur). Le véhicule se localise à l'initialisation avec calibrage, exécute la mission en boucle avec suivi de position estimée, puis revient au point de départ avec précision <50cm
+- **Parcours 2 - Détection obstacle** : capteurs continuellement actifs, fusion Lidar OU ultrason pour résolution 30cm. Si obstacle détecté à <1m, freinage d'urgence en <100ms, pause 1s. Tentative de contournement simple (décalage latéral de 30cm). Si le contournement échoue 2 fois, signalement par LED rouge + appel radio d'urgence + alerte web
 - **Parcours 3 - Mode manuel** : interface web avec joystick virtuel, l'opérateur reprend contrôle avec latence <500ms. Affichage télémétrie en temps réel : position estimée, vitesse, batterie, distance obstacle
 - **Journal mission** : chaque sortie enregistrée localement (JSON) : timestamp, vitesse moyenne, distance parcourue, obstacles rencontrés, actions correctives, batterie à la fin. Export en CSV pour analyse post-mission
 - **Sécurité de fonctionnement** : boucle d'arrêt embarquée indépendante qui coupe immédiatement les moteurs si : signal radio perdu >2s, tension batterie <10%, collision détectée. Cette boucle s'exécute à 50Hz sur microcontrôleur dédié
@@ -228,11 +244,11 @@ Détail fonctionnel attendu :
 
 Fonctionnalités MVP :
 - Déplacement autonome sur parcours prédéfini (3-4 waypoints)
-- Détection d'obstacles et arret d'urgence
-- Télémétrie en temps réel sur dashboard
+- Détection d'obstacles et arrêt d'urgence
+- Télémétrie en temps réel sur tableau de bord
 - Mode manuel de secours avec joystick web
 - Journalisation mission avec export CSV
-- Système d'arrêt d'urgence redéterministe embarqué
+- Système d'arrêt d'urgence déterministe embarqué
 
 Extensions possibles :
 - Planification de trajectoire dynamique avec A* (obstacle avoidance en t.r.)
@@ -247,14 +263,14 @@ KPI de validation :
 - Latence de réaction obstacle (<150ms)
 - Taux de fonctionnement en mode dégradé sans interface (>95%)
 - Précision position finale vs point de départ (<1m)
-- Disponibilité radio emergency stop (>99%)
+- Disponibilité radio d'arrêt d'urgence (>99%)
 
 Valeur pédagogique :
-- Robotique mobile et cinématique (différentiel, odmétrie)
-- Fusion capteurs (Kalman filter simplifié pour position)
+- Robotique mobile et cinématique (différentiel, odométrie)
+- Fusion capteurs (filtre de Kalman simplifié pour la position)
 - Contraintes temps réel et boucles de contrôle
-- Sécurité de fonctionnement (fail-safe design)
-- Architecture distribuée (contrôle embarqué + supervision cloud local)
+- Sécurité de fonctionnement (conception fail-safe)
+- Architecture distribuée (contrôle embarqué + supervision locale)
 
 ---
 
@@ -268,22 +284,22 @@ Utilisateurs cibles :
 
 Composants possibles :
 - **Infrastructure de localisation** :
-  - **Option 1 : BLE Beacons** : 4-6 balises iBeacon TX @ -4dBm, fixées aux coins de la zone (10m x 15m ideal), calibrage distance d'reférence
+  - **Option 1 : BLE Beacons** : 4-6 balises iBeacon TX @ -4dBm, fixées aux coins de la zone (10m x 15m idéal), calibrage de distance de référence
   - **Option 2 : UWB (Ultra-Wideband)** : Qorvo ou Decawave (plus précis à 10-15cm mais coûteux)
-  - **Option 3 : Wi-Fi triangulation** : utiliser les RSSI des APs campus + théorématique d'atténuation
-- **Noeuds de mesure** : récepteurs ESP32 avec BLE ou UWB dispersés stratégiquement, filé en rséau local
+  - **Option 3 : Wi-Fi triangulation** : utiliser les RSSI des APs campus + théorie d'atténuation
+- **Nœuds de mesure** : récepteurs ESP32 avec BLE ou UWB dispersés stratégiquement, reliés en réseau local
 - **Serveur de triangulation** : backend .NET 10 ASP.NET Core exposant algorithme Trilatération ou Kalman simplifié. API REST : POST /locate avec balises signalées, GET /history/{objet_id}
 - **Interface cartographique** : SVG interactif avec plan du bâtiment, point position temps réel, trace historique dernier 1h coloriée par vitesse
-- **Base données locale** : PostgreSQL ou SQLite pour historique avec index sur (timestamp, objet_id). Retention configurable (défaut : 1 semaine)
-- **Communication** : Li-Fi ou 802.11ac pour bande passante temps réel, fallback sur 802.11b si surcharge
+- **Base de données locale** : PostgreSQL ou SQLite pour historique avec index sur (timestamp, objet_id). Rétention configurable (défaut : 1 semaine)
+- **Communication** : Li-Fi ou 802.11ac pour bande passante temps réel, avec repli sur 802.11b si surcharge
 
 Détail fonctionnel attendu :
 - **Parcours 1 - Initialisation zone** : admin web enregistre zone physique (dimensions, obstacles statiques), place 4-6 balises virtuelles dans plan. Système effectue calibrage de référence : parcours complet de la zone avec un objet de référence connu, enregistre RSSI par balise par position (grille 1m). Durée : 15-20min, résultats sauvegardés localement
-- **Parcours 2 - Suivi temps réel** : objet mobile (véhicule, personne avec beacon) transmet signal périodiquement (toutes les 500ms). Noeuds récepteurs envoient au serveur leur signalé + timestamp. Serveur applique Trilatération, estime position, met à jour carte. Latence cible : <1s du signal à l'affichage. Affichage : position en cercle, vecteur vitesse, precision radius (cercle d'incertitude) en couleur (vert si <30cm, orange si <50cm, rouge si >50cm)
-- **Parcours 3 - Export traces** : bouton "Export mission" charge dernier 1h d'historique, genere JSON + CSV avec colonnes : timestamp, X, Y, vitesse, objets proches, incidents. Fichier stocke localement
-- **API inter-projet** : endpoint /locate/latest/{objet_id} retourne {x, y, precision, updated_at} en JSON. Projet B peut appeler cette API pour synchroniser sa carte interne. Latence max 100ms
-- **Souverainété données** : aucun cloud. Base PostgreSQL locale obligatoire, chiffrée à repos (PgCrypto). Retention configurable par admin (par défaut 7 jours, purge auto). Droit à l'oubli : suppression manuelle ou par expiration
-- **Continuité réseau** : si réseau central indisponible >30s, chaque noeud bascule sur cache local + sync différentielle une fois réseau rétabli
+- **Parcours 2 - Suivi temps réel** : objet mobile (véhicule, personne avec beacon) transmet un signal périodiquement (toutes les 500ms). Noeuds récepteurs envoient au serveur leur signal + timestamp. Serveur applique la trilatération, estime la position et met à jour la carte. Latence cible : <1s du signal à l'affichage. Affichage : position en cercle, vecteur vitesse, rayon de précision (cercle d'incertitude) en couleur (vert si <30cm, orange si <50cm, rouge si >50cm)
+- **Parcours 3 - Export traces** : bouton "Export mission" charge la dernière heure d'historique, génère JSON + CSV avec colonnes : timestamp, X, Y, vitesse, objets proches, incidents. Fichier stocké localement
+- **API inter-projet** : point d'accès /locate/latest/{objet_id} retournant {x, y, precision, updated_at} en JSON. Le Projet B peut appeler cette API pour synchroniser sa carte interne. Latence max : 100ms
+- **Souveraineté des données** : aucun cloud. Base PostgreSQL locale obligatoire, chiffrée au repos (PgCrypto). Rétention configurable par admin (par défaut 7 jours, purge auto). Droit à l'oubli : suppression manuelle ou par expiration
+- **Continuité réseau** : si le réseau central est indisponible >30s, chaque nœud bascule sur cache local + synchronisation différentielle une fois le réseau rétabli
 
 Fonctionnalités MVP :
 - Position estimée en direct (à >80% de confiance)
@@ -297,14 +313,14 @@ Extensions possibles :
 - Géofencing avec alertes automatiques (ex: véhicule sort de la zone -> SMS/Slack)
 - Filtrage avancé Kalman (convergence rapide)
 - Estimation orientation de l'objet (si 2+ capteurs par objet)
-- Comparaison précision BLE vs Wi-Fi vs UWB (dashboard comparative)
+- Comparaison de précision BLE vs Wi-Fi vs UWB (tableau de bord comparatif)
 - Détection anomalies (saut position anormal -> perte capteur)
 
 KPI de validation :
 - Erreur moyenne de position (cible : <1m en 95% des cas)
-- Taux de rafraîtchissement stable (constance <10% jitter)
+- Taux de rafraîchissement stable (constance <10% jitter)
 - Disponibilité de l'API (>99%)
-- Capacité à continuer localisation en cas de coupure réseau partielle (1-2 noeuds hors ligne : persist <20s)
+- Capacité à continuer la localisation en cas de coupure réseau partielle (1-2 noeuds hors ligne : persistance <20 s)
 - Latence E2E signal à affichage (<1.5s)
 - Consommation batterie balise mobile (<48h sur 500mAh coin cell)
 
@@ -337,7 +353,7 @@ Contraintes spécifiques (issues du brief serre) :
 
 Composants possibles :
 - **Capteurs environnement** :
-  - Capteur humidité sol : two capacitance probe (DFRobot SEN0193 ou équivalent) avec dual points de mesure (haut/bas)
+  - Capteur humidité sol : sonde capacitive double (DFRobot SEN0193 ou équivalent) avec deux points de mesure (haut/bas)
   - Capteur température/humidité air : DHT22 ou BME280 (baromètre bonus)
   - Capteur luminosité : LUX BH1750 (0-65536 lux)
   - Capteur débit d'eau : compteur turbine YF-S201 pour arrosage
@@ -347,21 +363,21 @@ Composants possibles :
   - Ventilateur axial : 5V 50mm pour circulation air
   - LED horticole optionnelle : strip 18W LED rouges+bleues (ratio 3:1)
   - Solénoïde de drain (optionnel)
-- **Électronique** : ESP32 Dev Board avec shield relay (4 canaux) + carte d'acquisition analogique
+- **Électronique** : carte ESP32 de développement avec shield relais (4 canaux) + carte d'acquisition analogique
 - **Stockage eau** : réservoir PVC transparent 10L avec flotteur magnétique (low battery alert)
 - **Alimentation** : batterie Li-Po 5000mAh (min 5 jours autonomie) + panneau solaire 20W en option
-- **Communication** : Wi-Fi 802.11ac + RTC embarqué (DS3231) pour persistance date
+- **Communication** : Wi-Fi 802.11ac + RTC embarqué (DS3231) pour la persistance de la date
 - **Base locale** : SQLite ou TimescaleDB (Postgres léger) pour séries temporelles
 
 Détail fonctionnel attendu :
-- **Parcours 1 - Acquisition continue** : chaque capteur lu toutes les 5min, données envoyées au backend local, stockées avec timestamp. Dashboard affiche courbes temps réel pour 24h glissantes : temp, humidité sol, humidité air, luminosité. Moyennes horaires calculées et archivées
-- **Parcours 2 - Recommandations explicables** : modèle de décision local (arbres de décision ou rules engine simple) évalue état serre vs contraintes plante. Ex:
+- **Parcours 1 - Acquisition continue** : chaque capteur est lu toutes les 5min, données envoyées au backend local, stockées avec timestamp. Le tableau de bord affiche des courbes temps réel sur 24h glissantes : temp, humidité sol, humidité air, luminosité. Moyennes horaires calculées et archivées
+- **Parcours 2 - Recommandations explicables** : modèle de décision local (arbres de décision ou moteur de règles simple) évaluant l'état de la serre vs contraintes plante. Ex. :
   - SI humidité_sol < 30% ALORS "Arroser maintenant (raison : sol sec depuis 2h, événements : aucun)"
   - SI temp > 28°C ET humidité < 40% ALORS "Ventiler immédiatement (raison : climat trop chaud et sec)"
   - SI soleil < 2h AUJOURD'HUI ET LED disponible ALORS "Lumière insuffisante, allumer LED 4h ce soir?"
   - Chaque action est justifiée par critères mesurables
-- **Parcours 3 - Pilotage manuel** : l'utilisateur peut forcer l'arrosage, ventilation ou LED depuis l'app mobile (locale). Pendant 5s après action manuelle, l'IA se met en pause. Résultats immédiatement visibles sur capteurs (pour confirmer l'action a fonctionné)
-- **Parcours 4 - Journal agronomique** : chaque action (arrosage, ventilation, LED) loggée avec raison, durée, volume d'eau consommé, énergie utilisée. Interface affiche timeline : "09:30 - Arrosage (30s, 150mL eau) - Raison : humidité sol en baisse"
+- **Parcours 3 - Pilotage manuel** : l'utilisateur peut forcer l'arrosage, la ventilation ou les LED depuis l'application mobile (locale). Pendant 5s après action manuelle, l'IA se met en pause. Résultats immédiatement visibles sur capteurs (pour confirmer que l'action a fonctionné)
+- **Parcours 4 - Journal agronomique** : chaque action (arrosage, ventilation, LED) est journalisée avec raison, durée, volume d'eau consommé, énergie utilisée. L'interface affiche une chronologie : "09:30 - Arrosage (30s, 150mL eau) - Raison : humidité sol en baisse"
 - **Parcours 5 - Application smartphone locale** : accessible sur réseau local via QR-code (http://serre.local:8000). Interface minimale : état serre (feu tricolore), recommandation en gros texte, historique 3 dernières actions. Pas de notifications push (sobriété), consultation manuelle
 - **Parcours 6 - UX d'action** : recommandations formatées comme des questions simples :
   - "Arroser maintenant? (oui/non)"
@@ -371,7 +387,7 @@ Détail fonctionnel attendu :
 - **Mode autonome** : en absence d'interface pendant 24h, serre continue fonctionnement sur règles déterministes locales (seuils fixes sauvegardés)
 
 Architecture de sûreté recommandée :
-- **Niveau 1 (embarqué prioritaire)** : règles vitales locales exécutées à 50Hz sur ESP32 (interrupt timer) : 
+- **Niveau 1 (embarqué prioritaire)** : règles vitales locales exécutées à 50Hz sur ESP32 (timer d'interruption) : 
   - SI humidité_sol < 15% ALORS pompe=ON pendant max 30s (sauvegarde plante)
   - SI temp > 35°C ALORS ventilo=ON continu (prévention coup de chaleur)
 - **Niveau 2 (supervision)** : si backend indisponible, ces règles continuent à fonctionner
@@ -410,13 +426,13 @@ KPI de validation :
 - Énergie utilisée vs autonomie batterie prédite
 
 Valeur pédagogique :
-- IoT complet capteur->backend->interface web+mobile
+- Chaîne IoT complète capteur -> backend -> interface web/mobile
 - Modélisation de données temporelles et séries
 - IA interprétable pour prise de décision (vs boîte noire)
-- Suretté de fonctionnement et priorité fonctions vitales
+- Sûreté de fonctionnement et priorité des fonctions vitales
 - Eco-conception et mesure d'impact technique
 - Post-mortem scientifique en cas d'échec biologique
-- Edge computing et hébergement souverain
+- Edge computing (informatique en périphérie) et hébergement souverain
 - Gestion énergie et autonomie système embarqué
 
 ---
@@ -433,14 +449,14 @@ Composants possibles :
 - **Système de mouvement** :
   - Plateau motorisé (pivot ±90° via servo 200° 80kg/cm) OU système cartésien XY gantry (moteurs pas-à-pas NEMA17)
   - Encodeurs optiques sur moteurs pour retour de position
-  - Système de coordonnées absolu (endstop magnétiques)
+  - Système de coordonnées absolues (endstop magnétiques)
 - **Perception** :
   - Caméra USB 1080p montée en zénith avec calibrage géométrique
   - Éclairage LED RVB ambigu (minimiser ombres)
-  - Détection pièces par couleur + template matching (OpenCV)
+  - Détection de pièces par couleur + appariement de motifs (OpenCV)
 - **Préhension/Action** :
   - Électro-aimant 24V 50N pour pièces ferrées OU servo pour poussée douce
-  - Bras léger (Arduino-controlled end-effector) si manipulation
+  - Bras léger (effecteur piloté par Arduino) si manipulation
   - Mécanisme de blocage pièces sur trajet (roulements)
 - **Intelligence** :
   - Moteur de règles pour échiquier (openChess ou compatible)
@@ -449,9 +465,9 @@ Composants possibles :
 - **Communication** : Wi-Fi local pour superviseur web
 
 Détail fonctionnel attendu :
-- **Parcours 1 - Coup autonome** : caméra capture plateau, détecte positions pièces (board state), IA calcule meilleur coup en <5s, système déplace pièce source vers destination via moteurs+end-effector. Mouvement exécuté en boucle fermée avec correction si variation ±1cm
-- **Parcours 2 - Vérification cohérence** : après chaque coup, re-scan plateau entier, valide état réel vs état attendu. Si pièce mal positionnée, signal LED rouge + demande confirmation humaine ("Correction pièce détectée, valider?")
-- **Parcours 3 - Traçabilité décision** : interface web affiche pour chaque coup : pièce déplacée, destination, coups alternatifs envisagés (top-3), justification IA ("Protège cavalier, contrôle centre"), score position post-coup. Utilisateur peut "rejouer" coups passés en mode visualisation
+- **Parcours 1 - Coup autonome** : la caméra capture le plateau, détecte les positions des pièces (état du plateau), l'IA calcule le meilleur coup en <5s, puis le système déplace la pièce source vers la destination via moteurs + effecteur. Mouvement exécuté en boucle fermée avec correction si variation ±1cm
+- **Parcours 2 - Vérification cohérence** : après chaque coup, rescane du plateau entier, validation état réel vs état attendu. Si pièce mal positionnée, signal LED rouge + demande de confirmation humaine ("Correction pièce détectée, valider ?")
+- **Parcours 3 - Traçabilité décision** : l'interface web affiche pour chaque coup : pièce déplacée, destination, coups alternatifs envisagés (top 3), justification IA ("Protège cavalier, contrôle centre"), score de position post-coup. L'utilisateur peut "rejouer" les coups passés en mode visualisation
 - **Parcours 4 - Gestion incidents** :
   - Pièce bloquée <5cm de destination : essai tassement x3, sinon alerte 
   - Pièce mal reconnue après coup : mode manuel 30s pour correction utilisateur
@@ -459,24 +475,24 @@ Détail fonctionnel attendu :
 - **Parcours 5 - Mode spectateur** : affichage temps réel plateau via projecteur ou tablette, annotations mouvements en couleur (pièce en vert, destination en jaune)
 
 Fonctionnalités MVP :
-- Reconnaissance des pièces et position (accuracy >95%)
+- Reconnaissance des pièces et position (précision >95%)
 - Exécution coups automatiques (latence <10s)
 - Historique coups avec justification IA minimale
 - Mode pause/reprise avec validation humaine
 - Échiquier uniquement (règles complètes)
 
 Extensions possibles :
-- Support multiple jeux (dames, Othello, jeu chinois)
+- Support de multiples jeux (dames, Othello, jeu chinois)
 - Stratégie IA avancée (réseau de neurones convolutif pour évaluation position)
 - Mode "puzzles" pédagogique (IA donne indices)
-- Reconnaissance adversaire par webcam (position joueur utilisé pour adaptation difficulté)
+- Reconnaissance adversaire par webcam (position joueur utilisée pour adaptation de la difficulté)
 - Partage partie via réseau (IA vs IA)
 
 KPI de validation :
-- Reconnaissance correcte pièces : >95% en première tentative
+- Reconnaissance correcte des pièces : >95% en première tentative
 - Taux coups exécutés sans intervention : >90%
 - Précision placement ±2cm en destination
-- Temps coup (calcul + exécution) : <15s
+- Temps par coup (calcul + exécution) : <15s
 - Disponibilité système : >98% sur 1h partie
 
 Valeur pédagogique :
@@ -484,32 +500,32 @@ Valeur pédagogique :
 - Prise de décision IA avec temps limité (minimax avec pruning)
 - Robotique de manipulation de précision
 - Orchestration temps réel d'états complexes
-- Human-in-the-loop validation
+- Validation avec humain dans la boucle
 
-Fonctionnalites MVP:
-- Reconnaissance des pieces et de leur position
-- Execution automatique de deplacements simples
+Fonctionnalités MVP:
+- Reconnaissance des pièces et de leur position
+- Exécution automatique de déplacements simples
 - Historique des coups
 - Mode pause/reprise avec validation humaine
 
 Extensions possibles:
-- Stratégie IA plus avancée
-- Support de plusieurs jeux (echecs, dames, othello simplifie)
+- Stratégie IA plus avancée
+- Support de plusieurs jeux (échecs, dames, othello simplifié)
 - Mode spectateur avec explication des coups
 
 KPI de validation:
-- Taux de reconnaissance correcte des pieces
-- Taux de coups executés sans intervention
-- Precision du placement mecanique
+- Taux de reconnaissance correcte des pièces
+- Taux de coups exécutés sans intervention
+- Précision du placement mécanique
 
-Valeur pedagogique:
-- vision par ordinateur
-- prise de decision par IA
-- robotique de manipulation de precision
+Valeur pédagogique:
+- Vision par ordinateur
+- Prise de décision par IA
+- Robotique de manipulation de précision
 
 ---
 
-### Projet L - Casier intelligent de prêt de matériel
+### Projet F - Casier intelligent de prêt de matériel
 Objectif :
 Gérer un casier connecté permettant de prêter du matériel aux étudiants avec traçabilité, autorisation et suivi des retours.
 
@@ -528,7 +544,7 @@ Composants possibles :
   - API REST .NET ASP.NET Core: POST /reserve, POST /return, GET /inventory, PATCH /maintenance
   - Base PostgreSQL : user (ID_badge, nom, droit), inventory (casier, objet, état), audit (action, who, when, proof_hash)
 - **Application web** :
-  - Frontend React/Vue.js : réservation objet par catégorie, historique emprunts, admin panel pour gestion état
+  - Interface React/Vue.js : réservation objet par catégorie, historique emprunts, panneau admin pour gestion d'état
   - Export rapports : utilisation par étudiant, taux de retour, objets manquants, temps moyen de prêt
 - **Sécurité et traçabilité** :
   - Photo locale (Pi Camera) au moment retour (preuve dépôt, état objet)
@@ -537,15 +553,15 @@ Composants possibles :
 - **Communication** : Wi-Fi 802.11ac pour réseau lab local
 
 Détail fonctionnel attendu :
-- **Parcours 1 - Réservation et prêt** : étudiant authenticate via badge (scan RFID), sélectionne objet désiré. Si disponible et autorisé, réservation confirmée avec heure d'ouverture. À l'heure : casier correspondant s'ouvre (LED verte + bip), objet prélevé. Retrait confirmé par capteur contact ou image capteur
-- **Parcours 2 - Retour matériel** : étudiant place objet retour dans casier prévu. Photo automatique prise. Admin accède au web pour valider retour :
-  - Complète? → Libre (vert)
-  - Abîmée? → Maintenance nécessaire (orange, blockade 1 semaine)
-  - Manquant? → Alerte (rouge, facturation étudiant si applicable)
+- **Parcours 1 - Réservation et prêt** : l'étudiant s'authentifie via badge (scan RFID), sélectionne l'objet désiré. Si disponible et autorisé, la réservation est confirmée avec heure d'ouverture. À l'heure prévue : le casier correspondant s'ouvre (LED verte + bip), objet prélevé. Retrait confirmé par capteur de contact ou capteur image
+- **Parcours 2 - Retour matériel** : l'étudiant place l'objet retour dans le casier prévu. Photo automatique prise. L'admin accède au web pour valider le retour :
+  - Complet ? -> Libre (vert)
+  - Abîmé ? -> Maintenance nécessaire (orange, blocage 1 semaine)
+  - Manquant ? -> Alerte (rouge, facturation étudiant si applicable)
 - **Parcours 3 - Alertes et gestion retards** : si matériel non retourné 24h après échéance : email auto + SMS si num tel connu. Après 48h : casier automatiquement bloqué pour l'utilisateur
-- **Parcours 4 - Checklist état** : lors de chaque retour, images compressées + calcul hash MD5. Admin vérifie visuellement vs checklist pré-définie ("4 vis présents? Batterie dedans? Aucune rayure?"). Feedback automatisé pour étudiant
-- **Parcours 5 - Passage maintenance** : objet endommagé -> workflow maintenance workflow : technicien accède panel "à réparer", log actions, date estimée retour à service, reclassification
-- **Parcours 6 - Rapports fiabilité** : graphe matériel vs taux de perte/avarie/retard. Top 5 emprunteurs fiables. Recommandation dépréciation objet (ex: 6 avaries -> retrait du catalogue)
+- **Parcours 4 - Checklist état** : lors de chaque retour, images compressées + calcul de hash MD5. L'admin vérifie visuellement vs checklist pré-définie ("4 vis présents ? Batterie dedans ? Aucune rayure ?"). Retour automatisé pour l'étudiant
+- **Parcours 5 - Passage maintenance** : objet endommagé -> flux de maintenance : le technicien accède au panneau "à réparer", journal des actions, date estimée de retour en service, reclassification
+- **Parcours 6 - Rapports fiabilité** : graphe matériel vs taux de perte/avarie/retard. Top 5 emprunteurs fiables. Recommandation de dépréciation objet (ex. : 6 avaries -> retrait du catalogue)
 
 Fonctionnalités MVP :
 - Authentification utilisateur (RFID/badge)
@@ -561,7 +577,7 @@ Extensions possibles :
 - Notification retard (SMS/Slack)
 - Inventaire intelligent par catégorie
 - Score de fiabilité des emprunteurs (accès tarif réduit si bon score)
-- Workflow de maintenance intégré
+- Flux de maintenance intégré
 - Rapport mensuel d'usage et pertes
 - Intégration avec SAP/ERP pour amortissement
 - Code-barres ou QR sur objets pour traçabilité fine
@@ -576,21 +592,21 @@ KPI de validation :
 - Faux positifs détection retour <2%
 
 Valeur pédagogique :
-- Système d'information complet (API, frontend, BD)
+- Système d'information complet (API, interface web, BD)
 - Sécurisation accès physique + audit
 - UX opérationnelle pour usage quotidien massif
 - Gestion d'actifs et maintenance
 - Intégration caméra et vision pour preuve
-- Autorisation et roles (user/admin/tech)
+- Autorisation et rôles (user/admin/tech)
 - Design scalable pour 100+ étudiants
 - Parcours 3: alerte si retard, matériel absent ou ouverture anormale.
-- Parcours 4: checklist d'état au retour (complet, endommagé, batterie faible, accessoire manquant).
+- Parcours 4 : checklist d'état au retour (complet, endommagé, batterie faible, accessoire manquant).
 - Parcours 5: passage automatique en maintenance ou quarantaine si anomalie détectée.
 - Parcours 6: tableau de fiabilité par type de matériel (taux de perte, pannes, retards).
 
 ---
 
-### Projet N - Jeu de fléchettes avec reconnaissance par caméra
+### Projet G - Jeu de fléchettes avec reconnaissance par caméra
 Objectif :
 Concevoir un système de jeu de fléchettes numérique qui détecte automatiquement la position des fléchettes sur la cible par vision par ordinateur, gère les règles du jeu (301, Cricket, etc.) et affiche les scores en direct.
 
@@ -603,8 +619,8 @@ Composants possibles :
 - **Système d'imagerie** :
   - 3 caméras RGB 4K disposées autour de la cible (ou multi-vue calibrée à 120° d'écart) montées sur rail fixe
   - Résolution 2160x4320 minimum pour détection centimétrique
-  - Synchronisation temporelle des 3 flux (trigger GPIO ou NTP)
-  - Calibrage géométrique 3D (reproject positions 2D en 3D)
+  - Synchronisation temporelle des 3 flux (déclenchement GPIO ou NTP)
+  - Calibrage géométrique 3D (reprojection de positions 2D en 3D)
 - **Cible physique** :
   - Cible standard professionnel (68cm) ou améliorée avec marqueurs visuels (LED infra si sobriété)
   - Surface texturée contrastée pour robustesse détection
@@ -614,7 +630,7 @@ Composants possibles :
   - Réduction des ombres via diffusion, angle 45°
   - Capteur LUX pour normalisation automatique
 - **Backend** :
-  - Service .NET Core de traitement image (OpenCV binding ou EmguCV)
+  - Service .NET Core de traitement image (liaison OpenCV ou EmguCV)
   - Moteur de règles (301, Cricket, Around the World, Shanghai) avec logging complet
   - API REST : POST /throw, GET /scores, GET /stats/{joueur}
   - Base PostgreSQL pour historique parties (1000+ parties/saison)
@@ -622,27 +638,27 @@ Composants possibles :
   - Écran tactile 24\" OU projection murale 200\" avec Apple TV
   - Interface temps réel des scores + visualisation fléchettes détectées
   - Leaderboard persistant stocké localement
-- **Communication** : Wi-Fi 802.11ac (latence critique), failover Ethernet filé
+- **Communication** : Wi-Fi 802.11ac (latence critique), basculement Ethernet filaire
 
 Détail fonctionnel attendu :
 - **Parcours 1 - Initialisation partie** : admin crée partie sur tablette :
   - Nom du mode : 301, Cricket, Around the world, Shanghai
   - Nombre de joueurs : 1-8 (validé)
   - Affichage scores cible : réfléchi en fonction du mode (501, 301, etc.)
-  - Création session avec UUID (id partie) stockée immédiatement
-- **Parcours 2 - Détection fléchettes** : dès arrivée fléchette dans FOV (frame >2% change), 3 caméras capturent simultanément. Pipeline :
+  - Création de session avec UUID (id partie) stockée immédiatement
+- **Parcours 2 - Détection fléchettes** : dès arrivée d'une fléchette dans le FOV (variation d'image >2%), 3 caméras capturent simultanément. Pipeline :
   1. Détection zone sombre (fléchette, tige)
   2. Extraction centroïde 2D par caméra
   3. Triangulation 3D via matrices de calibration
-  4. Projection sur plan cible + lookup table (x,y) → (zone cible : simple/double/triple/bullseye)
-  - Latence total : <500ms du frame au résultat points
-- **Parcours 3 - Calcul points** : selon zone + mode de jeu :
+  4. Projection sur plan cible + table de correspondance (x,y) -> (zone cible : simple/double/triple/bullseye)
+  - Latence totale : <500ms entre image et résultat points
+- **Parcours 3 - Calcul des points** : selon zone + mode de jeu :
   - Mode 301 : si triple 20, 60 points = débuter de 301, descendre à 0 avec finish double
   - Mode Cricket : marqueur de zones (15-20, bullseye), scorer si 3x touches, le meilleur gagne
   - Validation : affichage immédiat "Triple 20 = 60 pts!" + son feedback
 - **Parcours 4 - Gestion séquence joueurs** : tour par tour automatique :
   - "Tour 1 - Jean: (affichage score)"
-  - Détection 3 fléchettes (ou user input si timeout 30s)
+  - Détection de 3 fléchettes (ou saisie utilisateur si timeout 30s)
   - Calcul cumulatif, passage joueur suivant
   - Pause graphique 2s entre joueurs
 - **Parcours 5 - Affichage temps réel** :
@@ -655,8 +671,8 @@ Détail fonctionnel attendu :
   - Statistiques joueur : taux précision par zone (triple=best, bull=second)
 - **Gestion incidents** :
   - Fléchette non détectée ou ambiguë (<60% confiance) : LED jaune + invite joueur/arbitre "Confirmer zone? [Selector]"
-  - Fléchette tombée entre caméras : default zone "miss"
-  - Joueur conteste : arbitre ajuste score manuel en 5s (log audit : "Admin correction Jean -20 pts")
+  - Fléchette tombée entre caméras : zone par défaut "miss"
+  - Joueur conteste : arbitre ajuste le score manuellement en 5s (journal d'audit : "Admin correction Jean -20 pts")
   - Mode dégradé : saisie manuelle zone fléchette via boutons physiques (5 zones = 5 boutons)
 
 Fonctionnalités MVP :
@@ -673,10 +689,10 @@ Extensions possibles :
 - Statistiques joueur avancées (taux précision par zone, évolution série)
 - Classement multi-parties et ligue locale (table ELO?)
 - Notifications vocales des scores
-- Reconnaissance joueurs par visage ou badge (intégration caméra détection)
+- Reconnaissance des joueurs par visage ou badge (intégration caméra détection)
 - Couplage projecteur pour affichage compétition (leaderboard public)
 - Analyse IA trajectoires et prédictions
-- Sync cloud optionnelle (ligue centralisée, si choix utilisateur)
+- Synchronisation cloud optionnelle (ligue centralisée, si choix utilisateur)
 
 KPI de validation :
 - Précision détection fléchettes (>95% de reconnaissance en 1ère tentative)
@@ -695,27 +711,180 @@ Valeur pédagogique :
 - Synchronisation multi-source et latence critique
 - Audit et intégrité données (fairplay)
 
+---
+
+### Projet H - Bataille navale électronique modulaire
+Objectif :
+Concevoir un jeu de bataille navale physique-numérique avec deux plateaux par joueur, un affichage lumineux de l'état des navires, un écran de supervision, et une communication radio entre modules indépendants.
+
+Utilisateurs cibles :
+- Joueur en duel local (2 modules)
+- Joueur solo contre IA (1 module)
+- Observateur pédagogique qui suit les états de jeu en temps réel
+
+Composants possibles :
+- **Module joueur (x1 ou x2)** :
+  - 1 plateau vertical lumineux (état flotte du joueur)
+  - 1 plateau horizontal lumineux (zone de tir sur l'adversaire)
+  - 1 écran (LCD/TFT) pour l'état de partie, les étapes et le choix du mode
+  - 1 microcontrôleur ESP32 (ou équivalent) avec radio embarquée
+- **Détection de position des bateaux** :
+  - Grille instrumentée (contacts magnétiques/reed, Hall, ou autre détection de présence)
+  - Calibration automatique de la grille au démarrage
+  - Validation anti-erreur (navires hors grille, chevauchement interdit)
+- **Affichage lumineux** :
+  - Matrice LED RGB (WS2812B ou équivalent) sur chaque plateau
+  - Codification d'état claire :
+    - navire non touché
+    - navire touché
+    - navire coulé
+    - tir ennemi dans l'eau
+    - eau libre
+- **Communication radio** :
+  - Lien sans fil entre deux modules (ESP-NOW, mesh léger, ou protocole équivalent)
+  - Synchronisation d'état de tour, tirs, accusés de réception et fin de partie
+  - Fonctionnement sans liaison physique filaire entre joueurs
+- **Backend local optionnel** :
+  - Service .NET 10 pour journaux, analyses de partie, replay, et supervision web locale
+
+Détail fonctionnel attendu :
+- **Parcours 1 - Placement des navires** : le joueur place virtuellement ses bateaux sur le plateau vertical. Le système détecte automatiquement les positions et vérifie la validité de la configuration. L'écran guide étape par étape ("placer porte-avions", "placer destroyer", etc.).
+- **Parcours 2 - Vue flotte (plateau vertical)** : le plateau vertical affiche en continu l'état de la flotte du joueur : navires intacts, touchés, coulés, et impacts ennemis dans l'eau.
+- **Parcours 3 - Vue attaque (plateau horizontal)** : le joueur sélectionne ses tirs sur le plateau horizontal. L'interface lumineuse et l'écran indiquent les cases déjà jouées, les touches, les ratés et l'avancement global.
+- **Parcours 4 - Communication inter-modules** : chaque tir est transmis par radio à l'autre module, puis validé (touché/coulé/raté). Les deux écrans restent synchronisés sur la phase de jeu en cours.
+- **Parcours 5 - Mode IA** : avec un seul module, le joueur affronte une IA locale. L'IA propose plusieurs niveaux (aléatoire, chasse ciblée, stratégie probabiliste simple).
+- **Parcours 6 - Choix du type de jeu** : l'écran permet de choisir le mode (solo IA, duel 2 modules), la taille de grille (si extensible), et éventuellement des variantes de règles.
+- **Mode dégradé** : si radio indisponible temporairement, mise en file locale des actions et reprise automatique à la reconnexion avec résolution de cohérence.
+
+Fonctionnalités MVP :
+- Détection automatique du placement des navires
+- Affichage lumineux des états navire/eau sur le plateau vertical
+- Sélection des tirs sur le plateau horizontal
+- Synchronisation radio de base entre 2 modules
+- Mode solo contre IA locale
+- Écran d'état de partie avec guidage des étapes
+
+Extensions possibles :
+- Modes de jeu avancés (salves, brouillard de guerre, grilles variables)
+- IA améliorée (chasse probabiliste + apprentissage des patterns)
+- Journal et replay local des parties
+- Tableau de statistiques (précision, durée, nombre de coups)
+- Effets visuels/sonores renforcés pour feedback pédagogique
+- Tournois multi-modules sur réseau maillé
+
+KPI de validation :
+- Taux de détection correcte du placement des navires (>98%)
+- Latence tir -> retour d'état (touché/raté) en duel (<500 ms)
+- Taux de désynchronisation inter-modules (<1% par partie)
+- Stabilité mode IA sur partie complète (>99% sans blocage)
+- Compréhension utilisateur de l'état lumineux (>8/10 en test utilisateur)
+
+Valeur pédagogique :
+- Systèmes embarqués interactifs (détection + action + rendu)
+- Conception d'un protocole radio fiable et tolérant aux pertes
+- Gestion d'état distribué et synchronisation temps réel
+- UX de jeu tangible (plateaux lumineux + écran de guidage)
+- IA de stratégie discrète et évaluation de performance
+
+---
+
+### Projet I - Machine solveur de Rubik's Cube
+Objectif :
+Concevoir une machine capable d'analyser un Rubik's Cube mélangé, vérifier la cohérence de reconnaissance des couleurs, calculer une solution valide puis exécuter automatiquement les rotations jusqu'à résolution complète, avec un suivi visuel clair pour l'utilisateur.
+
+Utilisateurs cibles :
+- Utilisateur grand public qui lance une résolution en un bouton
+- Observateur pédagogique qui suit les étapes (vision, calcul, action)
+
+Composants possibles :
+- **Mécanique de manipulation** :
+  - Berceau de maintien du cube avec pinces souples anti-glissement
+  - 4 à 6 actionneurs (servos couple élevé ou moteurs pas-à-pas) pour effectuer les rotations des faces
+  - Fins de course ou encodeurs pour vérifier l'angle réel de rotation (90°/180°)
+- **Perception visuelle** :
+  - Caméra RGB fixe ou module multi-vues (1-2 caméras) avec éclairage LED uniforme
+  - Fond et gabarit de prise de vue pour réduire les erreurs de segmentation
+  - Pipeline OpenCV pour détection des 54 stickers et classification couleur
+- **Calcul de solution** :
+  - Backend .NET 10 (ASP.NET Core) ou service embarqué pour orchestration
+  - Solveur algorithmique (Kociemba 2-phase ou équivalent) pour générer la séquence de mouvements
+  - Validation de l'état du cube (parités, nombre de couleurs, configuration solvable)
+- **Interface utilisateur** :
+  - Écran tactile 3-5" ou interface web locale
+  - Bouton physique "Lancer" + voyant d'état (analyse, calcul, exécution, terminé)
+  - Barre de progression globale + compteur de mouvements restants
+- **Communication et données** :
+  - Wi-Fi local pour supervision optionnelle
+  - Journal local des sessions (temps analyse, temps calcul, temps exécution, erreurs)
+
+Détail fonctionnel attendu :
+- **Parcours 1 - Lancement simple** : l'utilisateur mélange son Rubik's Cube, le place dans la machine, puis appuie sur l'écran ou le bouton physique pour démarrer. L'interface passe immédiatement en mode "Analyse en cours".
+- **Parcours 2 - Analyse des faces** : la machine capture les 6 faces, détecte les facettes une à une et affiche une vue synthétique du cube reconstruit. Chaque couleur reconnue est visualisée sur un mini-cube 3D/2D.
+- **Parcours 3 - Vérification de cohérence** : avant tout mouvement, le système vérifie qu'il n'y a pas d'erreur de reconnaissance :
+  - 9 stickers par couleur
+  - centres cohérents
+  - état mathématiquement solvable
+  - en cas d'erreur, message explicite et reprise de capture automatique ou assistance manuelle
+- **Parcours 4 - Calcul de la solution** : le solveur calcule la séquence optimale ou quasi-optimale, puis affiche : nombre total de mouvements, estimation du temps, et premières étapes prévues.
+- **Parcours 5 - Exécution mécanique** : la machine enchaîne les mouvements du cube en boucle contrôlée. Chaque rotation est confirmée par capteur/encodeur et l'interface met à jour la progression globale (ex : 23/48 mouvements).
+- **Parcours 6 - Fin de cycle** : lorsque le cube est résolu, l'écran affiche une confirmation visuelle (état final résolu), émet un signal sonore court, puis l'utilisateur récupère le cube.
+- **Mode de sécurité** : arrêt immédiat possible via bouton stop. En cas de blocage mécanique, la machine s'interrompt, journalise l'incident et propose reprise ou annulation.
+
+Fonctionnalités MVP :
+- Lancement de la résolution par bouton/écran
+- Reconnaissance automatique des 6 faces
+- Vérification de validité de l'état du cube
+- Calcul de solution avec séquence de mouvements
+- Exécution mécanique complète de la séquence
+- Affichage de progression globale et étape courante
+- Journal de session local
+
+Extensions possibles :
+- Optimisation du temps total (vitesse moteur + séquence minimisée)
+- Mode "explication" (afficher la logique de résolution par blocs/étapes)
+- Statistiques comparatives par cube (moyenne, meilleur temps, taux d'erreur vision)
+- Support de variantes (2x2, 4x4 avec contraintes supplémentaires)
+- Détection d'usure mécanique prédictive (maintenance)
+
+KPI de validation :
+- Taux de reconnaissance correcte des facettes (>98% cible)
+- Taux de détection d'états invalides (100% des cas de test préparés)
+- Taux de résolution complète sans intervention (>90% en MVP)
+- Temps moyen total d'un cycle (analyse + calcul + exécution)
+- Écart entre mouvements planifiés et exécutés (0 mouvement perdu)
+- Taux d'arrêts d'urgence ou blocages mécaniques (<5% des cycles)
+
+Valeur pédagogique :
+- Vision par ordinateur appliquée à un objet structuré (détection couleur, robustesse éclairage)
+- Algorithmique de recherche/optimisation (solveur de cube)
+- Robotique mécanique de précision (actionneurs, asservissement, anti-blocage)
+- UX temps réel avec transparence des étapes et progression
+- Sécurité opérationnelle (stop, reprise, gestion d'anomalies)
+- Intégration système complète capteur -> calcul -> action
+
 
 ## 9) Méthode de choix et affectation des 5 groupes
-Avec 7 idées disponibles (A à E, L, N), les étudiants disposent d'un vrai choix de sujet.
+Avec 9 idées disponibles (A à I), les étudiants disposent d'un vrai choix de sujet.
 
 Processus recommandé :
-- Étape 1 : chaque groupe soumet un Top 3 de projets (ordre de préférence).
+- Étape 1 : chaque groupe soumet un top 3 de projets (ordre de préférence).
 - Étape 2 : arbitrage enseignant selon faisabilité technique et équilibre de charge.
 - Étape 3 : validation officielle des 5 sujets retenus (1 sujet par groupe).
 
 Règles d'arbitrage suggérées :
 - Priorité aux sujets couvrant bien le socle complet (embarqué + backend + IA + interface).
 - Éviter que plusieurs groupes prennent des sujets trop similaires.
-- Garantir au moins 1 sujet orientée mobilité/robotique et 1 sujet orientée IoT environnement.
+- Garantir au moins 1 sujet orienté mobilité/robotique et 1 sujet orienté IoT environnement.
 
 Classement recommandé par difficulté et budget :
 
 | Projet | Intitulé | Difficulté | Budget matériel | Commentaire |
 | --- | --- | --- | --- | --- |
-| L | Casier intelligent de prêt de matériel | Faible à moyenne | Faible à moyen | Solide pour gestion d'accés et traçabilité |
+| F | Casier intelligent de prêt de matériel | Faible à moyenne | Faible à moyen | Solide pour gestion d'accès et traçabilité |
 | A | Mini robot interactif de bureau | Moyenne | Moyen | Bon point d'entrée pour embarqué + UX |
-| N | Jeu de fléchettes avec reconnaissance caméra | Moyenne à élevée | Moyen | Vision applicative, ludique, bon potentiel démo |
+| G | Jeu de fléchettes avec reconnaissance par caméra | Moyenne à élevée | Moyen | Vision applicative, ludique, bon potentiel démo |
+| H | Bataille navale électronique modulaire | Moyenne à élevée | Moyen | Jeu physique connecté, synchronisation radio et UX lumineuse |
+| I | Machine solveur de Rubik's Cube | Moyenne à élevée | Moyen à élevé | Excellente synthèse vision + algorithmique + mécanique |
 | C | Géolocalisation indoor en temps réel | Moyenne à élevée | Moyen à élevé | Sensible à la calibration et aux mesures |
 | D | Serre low-tech intelligente | Élevée | Moyen à élevé | Excellent sujet, mais fort risque terrain |
 | B | Mini véhicule autonome indoor | Élevée | Élevé | Très visible, intégration mécanique exigeante |
@@ -738,6 +907,6 @@ Couplage inter-projets recommandé :
 - Jalon 4 (Final) : Soutenance finale transverse (bilan, démo, perspectives)
 
 ## 11) Conclusion
-Le cadre proposé permet de conserver l'esprit initial (IA appliquée, concrét, ludique) tout en ajoutant un niveau de détail suffisant pour piloter 5 groupes de manière homogéne et évaluable.
+Le cadre proposé permet de conserver l'esprit initial (IA appliquée, concret, ludique) tout en ajoutant un niveau de détail suffisant pour piloter 5 groupes de manière homogène et évaluable.
 
-Le catalogue retenu (7 sujets) augmente le choix et facilite l'alignement entre interets des etudiants, budget materiel et niveau de difficulte.
+Le catalogue retenu (9 sujets) augmente le choix et facilite l'alignement entre intérêts des étudiants, budget matériel et niveau de difficulté.
