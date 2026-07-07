@@ -13,8 +13,9 @@ Orientation pédagogique souhaitée :
 - Effectif : 25 étudiants
 - Organisation : 5 groupes de 5 étudiants
 - Volume horaire cible par groupe : environ 900h
-- Découpage temporel : 3 périodes (4, 5 et 9 semaines, soit 18 semaines au total)
-- Évaluation orale : 1 soutenance à la fin de chaque période + 1 soutenance finale (soit 4 soutenances)
+- Découpage temporel : 4 périodes (4, 5, 7 et 3 semaines, soit 19 semaines projet au total)
+- Pauses projet : 4 semaines entre Période 1 et Période 2, puis 4 semaines entre Période 2 et Période 3 ; aucune pause entre Période 3 et Période 4
+- Évaluation orale : 1 soutenance à la fin de chaque période ; la soutenance de fin de Période 4 constitue la soutenance finale (soit 4 soutenances)
 
 ## 3) Analyse rapide du besoin
 Les idées initiales sont pertinentes car elles couvrent déjà :
@@ -36,6 +37,11 @@ Chaque projet devrait inclure au minimum :
 - Interface : application web ou mobile
 - IA : au moins un module exploitable en démonstration (classification, détection, recommandation, prédiction)
 - DevOps : gestion de version, CI simple, documentation déploiement
+- Conteneurisation : non autorisée (Docker, Podman, Kubernetes, etc.)
+- Hébergement : déploiement backend/site web possible sur VPS OVH type VPS-1 si nécessaire
+- Wi-Fi (si nécessaire) : utiliser le SSID `JUNIA_LAB`
+- Configuration réseau : prévoir un processus de provisioning (script, assistant de première configuration) ou un portail captif via access point Wi-Fi
+- Sécurité de configuration : ne jamais fixer en dur (hardcode) les paramètres Wi-Fi dans le code source
 
 Principes transverses inspirés du projet serre (à appliquer à tous les sujets) :
 - Local-first : chaîne logicielle hébergée en local (acquisition, stockage, backend, interface), sans dépendance cloud obligatoire.
@@ -54,15 +60,18 @@ Proposition de découpage :
 - Documentation, soutenance, démo finale : 15h
 
 Cadence par périodes :
-- Période 1 (Semaines 1 à 4) : cadrage, état de l'art, architecture cible, preuve de faisabilité
-- Période 2 (Semaines 5 à 9) : MVP logiciel + premier prototype électronique intégré + consolidation technique
-- Période 3 (Semaines 10 à 18) : module IA opérationnel, intégration système, robustesse, tests en conditions réelles, finalisation des livrables
+- Période 1 (4 semaines) : cadrage, état de l'art, architecture cible, preuve de faisabilité
+- Pause projet (4 semaines)
+- Période 2 (5 semaines) : MVP logiciel + premier prototype électronique intégré + consolidation technique
+- Pause projet (4 semaines)
+- Période 3 (7 semaines) : module IA opérationnel, intégration système, robustesse, tests en conditions réelles
+- Période 4 (3 semaines) : finalisation des livrables, répétition générale, préparation et exécution de la soutenance finale
 
 Soutenances :
-- Soutenance 1 : fin Période 1 (semaine 4, revue de cadrage)
-- Soutenance 2 : fin Période 2 (semaine 9, revue MVP)
-- Soutenance 3 : fin Période 3 (semaine 18, revue d'intégration et validation technique)
-- Soutenance finale : présentation finale complète (résultats, démo, retour critique)
+- Soutenance 1 : fin Période 1 (revue de cadrage)
+- Soutenance 2 : fin Période 2 (revue MVP)
+- Soutenance 3 : fin Période 3 (revue d'intégration et validation technique)
+- Soutenance 4 (finale) : fin Période 4, présentation finale complète (résultats, démo, retour critique)
 
 ## 6) Livrables attendus
 Pour chaque groupe :
@@ -104,10 +113,9 @@ Un projet est considéré valide uniquement si :
 
 ### Livrables attendus à chaque soutenance
 - Soutenance 1 (Semaine 4) : problème cible, EF/ENF v1, architecture v1, preuve de faisabilité.
-- Soutenance 2 (Semaine 8) : MVP intégré (software + électronique), tests de base, premier retour utilisateur.
-- Soutenance 3 (Semaine 12) : système consolidé, IA exploitable, tests d'intégration et robustesse.
-- Soutenance 4 (Semaine 16) : validation terrain, corrections, dossier quasi final.
-- Soutenance finale : bilan global, démo complète, mesures KPI, limites et feuille de route.
+- Soutenance 2 (fin Période 2) : MVP intégré (software + électronique), tests de base, premier retour utilisateur.
+- Soutenance 3 (fin Période 3) : système consolidé, IA exploitable, tests d'intégration et robustesse.
+- Soutenance 4 (fin Période 4, finale) : validation terrain, corrections, bilan global, démo complète, mesures KPI, limites et feuille de route.
 
 ## 7) Grille d'évaluation (exemple)
 - Qualité de la solution technique : 30%
